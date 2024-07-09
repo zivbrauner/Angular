@@ -1,0 +1,5 @@
+[
+    {"wish":"learn angular", "isComplete": false},
+    {"wish":"vacation", "isComplete": true},
+    {"wish":"have fun", "isComplete": false}
+]
