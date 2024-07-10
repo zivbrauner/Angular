@@ -1,1 +1,65 @@
-<p>contact works!</p>
+<form 
+    class="container p-5"
+    [formGroup]="contactForm"
+    (ngSubmit)="$event.preventDefault(); submitForm()"
+    >
+    <div class="mb-3">
+        <label class="form-label">Your Name</label>
+        <input
+        type="text"
+        class="form-control"
+        formControlName="senderName"
+        >
+        <small *ngIf="contactForm.get('senderName')?.invalid && (contactForm.get('senderName')?.dirty || contactForm.get('senderName')?.touched)"
+        class="text-danger">
+            This is required 
+        </small>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Your Email address</label>
+        <input
+        type="email"
+        class="form-control"
+        formControlName="senderEmail"
+        >
+        <div *ngIf="contactForm.get('senderEmail')?.invalid && (contactForm.get('senderEmail')?.dirty || contactForm.get('senderEmail')?.touched)">
+
+             <small class="text-danger"
+                    *ngIf="contactForm.get('senderEmail')?.hasError('required')"       
+             >
+                This field is required
+             </small>
+
+             <small class="text-danger"
+             *ngIf="contactForm.get('senderEmail')?.hasError('email')"       
+            >
+                This is an invalid Email
+            </small>
+
+            <small class="text-danger"
+            *ngIf="contactForm.get('senderEmail')?.hasError('invalidemaildomain')"       
+           >
+               This Email Domain is not suported.
+           </small>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Message</label>
+        <textarea
+        class="form-control"
+        rows="3"
+        formControlName="senderMessage"
+        ></textarea>
+        <small *ngIf="contactForm.get('senderMessage')?.invalid && (contactForm.get('senderMessage')?.dirty || contactForm.get('senderMessage')?.touched)"
+             class="text-danger">
+            Message must contain more then 10 carecters
+        </small>
+    </div>
+    <div class="mb-3">
+        <button
+            type="submit"
+            class = "btn btn-primary"
+            [disabled]="contactForm.invalid"
+            >Send Message</button>
+    </div>
+</form>
