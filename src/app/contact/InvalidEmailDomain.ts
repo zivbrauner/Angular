@@ -8,8 +8,11 @@ export function invalidEmailDomain(control: AbstractControl): ValidationErrors |
         return null;
     }
 
-    const matches = hosts.some(host=> value.indexOf('@${host}')>-1);
+    const matches = hosts.some(host=> value.includes(host));
 
-    return matches ? {invalidEmailDomain : true}:null;
-
+    if(matches){
+        return {invalidEmailDomain : true};
+    }else{
+        return null;
+    }
 }
