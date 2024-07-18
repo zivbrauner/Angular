@@ -1,5 +1,6 @@
 import { Component , OnInit,output,EventEmitter, Output } from '@angular/core';
 import { WishItem } from '../Shared/Module/WishItem';
+import { EventService } from '../Shared/Services/eventService';
 
 @Component({
   selector: 'add-wish-form',
@@ -9,7 +10,7 @@ import { WishItem } from '../Shared/Module/WishItem';
 export class AddWishFormComponent implements OnInit {
 
   @Output() addWish = new EventEmitter<WishItem>();
-  constructor(){}
+  constructor(private events: EventService){}
 
   ngOnInit(): void {
     
@@ -20,7 +21,9 @@ export class AddWishFormComponent implements OnInit {
 
   AddItemClick(){
     //this.items.push(new WishItem(this.newItemText));
-    this.addWish.emit(new WishItem(this.newItemText));
+    var newWishItem = new WishItem(this.newItemText);
+    this.addWish.emit(newWishItem);
+    this.events.emit('addWish',newWishItem);
     this.newItemText = '';
 }
 }

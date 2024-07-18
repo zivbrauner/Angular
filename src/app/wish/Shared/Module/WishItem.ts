@@ -1,4 +1,4 @@
 export class WishItem{
-    constructor(public wish : string, public isComplete : boolean = false)
+    constructor(public Wish : string, public IsComplete : boolean = false,public SerialNumber : string ='')
     {}
 }

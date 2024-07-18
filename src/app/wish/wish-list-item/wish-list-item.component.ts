@@ -18,7 +18,7 @@ export class WishListItemComponent implements OnInit {
   //@Output() fullfilledChange = new EventEmitter<boolean>();
 
   toggleFullfielld(){
-    this.wish.isComplete = !this.wish.isComplete;
+    this.wish.IsComplete = !this.wish.IsComplete;
     //this.fullfilledChange.emit(this.fullfilled);
   }
 
@@ -29,7 +29,7 @@ export class WishListItemComponent implements OnInit {
 
   get cssClasses(){
     // return this.fullfilled ?['strikeOut','text-muted'] :[];
-      return {'strikeOut text-muted':this.wish.isComplete };
+      return {'strikeOut text-muted':this.wish.IsComplete };
   }
 
 }

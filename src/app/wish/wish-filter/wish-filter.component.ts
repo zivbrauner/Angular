@@ -3,8 +3,8 @@ import { WishItem } from '../Shared/Module/WishItem';
 
 const filters = [
   (item: WishItem) => item,
-  (item: WishItem) => !item.isComplete,
-  (item: WishItem) => item.isComplete
+  (item: WishItem) => !item.IsComplete,
+  (item: WishItem) => item.IsComplete
 ]
 
 @Component({
@@ -25,7 +25,7 @@ export class WishFilterComponent implements OnInit {
 
   updateFilter(value : any){
     this.filter = filters[value]
-    this.filterChange .emit(this.filter);
+    this.filterChange.emit(this.filter);
   }
 
 }

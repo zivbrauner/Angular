@@ -17,7 +17,7 @@ export class WishService  {
         format:'json'
       }
     });
-    return this.http.get('assets/wishes.json',options).pipe(catchError(this.handleError));
+    return this.http.get('http://localhost:39900/api/WishList/GetWishes',options).pipe(catchError(this.handleError));
   }
 
   private getStandardOptions() : any {
@@ -42,17 +42,12 @@ export class WishService  {
   addWish(wish: WishItem){
     let options = this.getStandardOptions();
 
-    options.Headers.set('Authorization', 'value-need-for-authorization');
-    //this.http.post(url,wish,Options);
+    let params = new HttpParams()
+    .set('wishInfo', wish.Wish)
+    .set('isComplete', wish.IsComplete)
+
+    this.http.post('http://localhost:39900/api/WishList/AddWish',params).subscribe();
   }
 
-  // fileExists(url: string): Observable<boolean> {
-  //   return this.http.get(url).pipe(
-  //     map(() => true),
-  //     catchError((err: HttpErrorResponse) => {
-  //       const success: boolean = err.status.toString().startsWith('2')
-  //       return of(success)
-  //     })
-  //   )
-  // }
+
 }
