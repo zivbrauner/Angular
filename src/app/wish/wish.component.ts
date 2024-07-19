@@ -19,12 +19,16 @@ export class WishComponent implements OnInit{
     events.listen('removeWish',(item:any)=>{
       let index = this.items.indexOf(item);
       this.items.splice(index,1);
-      //this.wishService.
+      this.wishService.removeWish(item)
     })
 
     events.listen('addWish',(item:any)=>{
       this.wishService.addWish(item);
       //this.wishService.
+    })
+
+    events.listen('updateWish',(item:any)=>{
+      this.wishService.updateWish(item);
     })
   }
 

@@ -10,15 +10,7 @@ import { WishItem } from './Shared/Module/WishItem';
 export class WishService  {
 
   constructor(private http: HttpClient) {}
-   getWishes(){
-    let options = this.getStandardOptions();
-    options.params = new HttpParams({
-      fromObject: {
-        format:'json'
-      }
-    });
-    return this.http.get('http://localhost:39900/api/WishList/GetWishes',options).pipe(catchError(this.handleError));
-  }
+
 
   private getStandardOptions() : any {
     return {
@@ -39,14 +31,37 @@ export class WishService  {
       return throwError(()=> new Error('cannnot retrive Wishes'));
   }
 
-  addWish(wish: WishItem){
+  getWishes(){
     let options = this.getStandardOptions();
+    options.params = new HttpParams({
+      fromObject: {
+        format:'json'
+      }
+    });
+    return this.http.get('http://localhost:39900/api/WishList/GetWishes',options).pipe(catchError(this.handleError));
+  }
 
+  addWish(wish: WishItem){
     let params = new HttpParams()
     .set('wishInfo', wish.Wish)
     .set('isComplete', wish.IsComplete)
 
     this.http.post('http://localhost:39900/api/WishList/AddWish',params).subscribe();
+  }
+
+  removeWish(wish: WishItem){
+
+    this.http.delete('http://localhost:39900/api/WishList/RemoveWish/'+wish.SerialNumber).subscribe();
+  }
+
+  updateWish(wish: WishItem){
+    let params = new HttpParams()
+    .set('wishInfo', wish.Wish)
+    .set('isComplete', wish.IsComplete)
+    .set('wishId', wish.SerialNumber)
+
+    this.http.put('http://localhost:39900/api/WishList/UpdateWish',params).subscribe();
+
   }
 
 

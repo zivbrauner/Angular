@@ -19,7 +19,7 @@ export class WishListItemComponent implements OnInit {
 
   toggleFullfielld(){
     this.wish.IsComplete = !this.wish.IsComplete;
-    //this.fullfilledChange.emit(this.fullfilled);
+    this.events.emit('updateWish',this.wish);
   }
 
   removeWish()
